@@ -1,0 +1,209 @@
+<div id="app">
+  {{ message }}
+</div>
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+
+渲染========================
+
+<div id="app-2">
+  <span v-bind:title="message">
+    Hover your mouse over me for a few seconds to see my dynamically bound title!
+  </span>
+</div>
+
+var app2 = new Vue({
+  el: '#app-2',
+  data: {
+    message: 'You loaded this page on ' + new Date()
+  }
+})
+
+绑定属性========================
+
+<div id="app-3">
+  <p v-if="seen">Now you see me</p>
+</div>
+
+var app3 = new Vue({
+  el: '#app-3',
+  data: {
+    seen: true
+  }
+})
+
+条件判断========================
+
+<div id="app-4">
+  <ol>
+    <li v-for="todo in todos">
+      {{ todo.text }}
+    </li>
+  </ol>
+</div>
+
+var app4 = new Vue({
+  el: '#app-4',
+  data: {
+    todos: [
+      { text: 'Learn JavaScript' },
+      { text: 'Learn Vue' },
+      { text: 'Build something awesome' }
+    ]
+  }
+})
+
+循环绑定=====================
+
+
+<div id="app-5">
+  <p>{{ message }}</p>
+  <button v-on:click="reverseMessage">Reverse Message</button>
+</div>
+
+var app5 = new Vue({
+  el: '#app-5',
+  data: {
+    message: 'Hello Vue.js!'
+  },
+  methods: {
+    reverseMessage: function () {
+      this.message = this.message.split('').reverse().join('')
+    }
+  }
+})
+
+监听事件======================
+
+<div id="app-6">
+  <p>{{ message }}</p>
+  <input v-model="message">
+</div>
+
+var app6 = new Vue({
+  el: '#app-6',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+
+双向绑定=====================
+
+Vue.component('todo-item', {
+  template: '<li>This is a todo</li>'
+})
+
+<ol>
+  <!-- Create an instance of the todo-item component -->
+  <todo-item></todo-item>
+</ol>
+
+定义组件================
+
+Vue.component('todo-item', {
+  props: ['todo'],
+  template: '<li>{{ todo.text }}</li>'
+})
+
+组件加属性===============
+
+<span v-once>This will never change: {{ msg }}</span>
+
+第一次渲染有效============
+
+<div v-html="rawHtml"></div>
+
+纯 html 渲染===============
+<span>Message: {{ msg }}</span>
+文本渲染使用双大括号===================
+
+<div v-bind:id="dynamicId"></div>
+<a v-bind:href="url"></a>
+动态 id值绑定================
+
+<button v-bind:disabled="someDynamicCondition">Button</button>
+条件绑定事件=============
+
+
+
+<form v-on:submit.prevent="onSubmit"></form> --.prevent 修饰符告诉 v-on指令对于触发的事件调用 event.preventDefault()
+修饰符 和 过滤器不懂!!!!!!!
+
+<!-- 完整语法 -->
+<a v-bind:href="url"></a>
+<!-- 缩写 -->
+<a :href="url"></a>
+
+<!-- 完整语法 -->
+<a v-on:click="doSomething"></a>
+<!-- 缩写 -->
+<a @click="doSomething"></a>
+
+<div id="example">
+  <p>Original message: "{{ message }}"</p>
+  <p>Computed reversed message: "{{ reversedMessage }}"</p>
+</div>
+
+ar vm = new Vue({
+  el: '#example',
+  data: {
+    message: 'Hello'
+  },
+  computed: {
+    reversedMessage: function () {
+      return this.message.split('').reverse().join('')
+    }
+  }
+})
+简单的数据处理===============
+同时,它包含了另外一个知识点,计算缓存 即 计算一次之后 有缓存,只要 message值不变 反转的值不需要重新走计算方法,可以直接取值,但是如果需要避开缓存,实时计算数据,则选择使用 methods(自定义方js方法,)
+
+computed: {
+  fullName: {
+    // getter
+    get: function () {
+      return this.firstName + ' ' + this.lastName
+    },
+    // setter
+    set: function (newValue) {
+      var names = newValue.split(' ')
+      this.firstName = names[0]
+      this.lastName = names[names.length - 1]
+    }
+  }
+}
+//默认只有 getter方法 ,所以可以显示定义 setter方法===================
+
+观察watchers不懂!!!!!~!~@!~!~
+
+
+
+<ul id="repeat-object" class="demo">
+  <li v-for="value in object">
+    {{ value }}
+  </li>
+</ul>
+
+new Vue({
+  el: '#repeat-object',
+  data: {
+    object: {
+      FirstName: 'John',
+      LastName: 'Doe',
+      Age: 30
+    }
+  }
+})
+
+结果：
+John
+Doe
+30
+对象迭代===================(隐性 参数 key 和 index)
+
+
